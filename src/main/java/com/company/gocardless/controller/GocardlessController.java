@@ -1,9 +1,11 @@
 package com.company.gocardless.controller;
 
+import com.company.gocardless.entity.PaymentDetailsResponse;
 import com.company.gocardless.entity.RedirectFlowRequest;
-import com.company.gocardless.service.TokenisationService;
+import com.company.gocardless.service.TokenizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,10 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class GocardlessController {
 
     @Autowired
-    private TokenisationService tokenisationService;
+    private TokenizationService tokenizationService;
 
     @GetMapping("/getUrl")
     public RedirectFlowRequest getUrl() {
-       return tokenisationService.getPaymentProviderUrl();
+       return tokenizationService.getPaymentProviderUrl();
+    }
+
+    @GetMapping("/getPaymentDetails/{id}")
+    public PaymentDetailsResponse getPaymentDetails(@PathVariable long id) {
+        return tokenizationService.getPaymentDetailsByReference(id);
     }
 }

@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RedirectFlowRequestRepository extends CrudRepository<RedirectFlowRequest, Long> {
+
+    RedirectFlowRequest findById(long id);
+
 }
